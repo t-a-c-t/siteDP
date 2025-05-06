@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            @apply bg-gray-900 text-white;
+            @apply bg-gray-950 text-white;
         }
         .smooth-transition {
             @apply transition-all duration-300 ease-in-out;
@@ -19,133 +19,90 @@
     </style>
 </head>
 <body class="font-['Poppins']">
+
     <!-- Navbar -->
-    <nav class="bg-gray-800 shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-teal-400">DealPoint</h1>
-                </div>
-                <div class="hidden sm:flex sm:items-center sm:space-x-8">
-                    <a href="#home" class="text-gray-300 hover:text-teal-400 smooth-transition">Home</a>
-                    <a href="#services" class="text-gray-300 hover:text-teal-400 smooth-transition">Services</a>
-                    <a href="#about" class="text-gray-300 hover:text-teal-400 smooth-transition">About</a>
-                    <a href="#contact" class="text-gray-300 hover:text-teal-400 smooth-transition">Contact</a>
-                </div>
-                <div class="sm:hidden flex items-center">
-                    <button id="menu-toggle" class="text-gray-300 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
+    <nav class="bg-black shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between h-16 items-center">
+            <h1 class="text-2xl font-bold text-teal-400">DealPoint</h1>
+            <div class="hidden sm:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-teal-400 smooth-transition">Home</a>
+                <a href="#services" class="text-gray-300 hover:text-teal-400 smooth-transition">Services</a>
+                <a href="#about" class="text-gray-300 hover:text-teal-400 smooth-transition">About</a>
+                <a href="#contact" class="text-gray-300 hover:text-teal-400 smooth-transition">Contact</a>
             </div>
+            <button id="menu-toggle" class="sm:hidden text-gray-300 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden sm:hidden bg-gray-800 shadow-md">
-            <div class="px-4 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block text-gray-300 hover:text-teal-400 smooth-transition">Home</a>
-                <a href="#services" class="block text-gray-300 hover:text-teal-400 smooth-transition">Services</a>
-                <a href="#about" class="block text-gray-300 hover:text-teal-400 smooth-transition">About</a>
-                <a href="#contact" class="block text-gray-300 hover:text-teal-400 smooth-transition">Contact</a>
-            </div>
+        <div id="mobile-menu" class="hidden sm:hidden bg-black shadow-md px-4 pt-2 pb-3 space-y-1">
+            <a href="#home" class="block text-gray-300 hover:text-teal-400 smooth-transition">Home</a>
+            <a href="#services" class="block text-gray-300 hover:text-teal-400 smooth-transition">Services</a>
+            <a href="#about" class="block text-gray-300 hover:text-teal-400 smooth-transition">About</a>
+            <a href="#contact" class="block text-gray-300 hover:text-teal-400 smooth-transition">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-teal-500 to-coral-500 text-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to DealPoint</h2>
-            <p class="text-lg sm:text-xl mb-8">Your premier destination for outsourcing properties, crafting stunning websites, and more at unbeatable rates.</p>
-            <a href="#contact" class="inline-block bg-coral-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-coral-700 hover-scale">Get Started</a>
+    <section id="home" class="bg-gradient-to-r from-teal-500 to-purple-600 text-white py-20 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-5xl font-bold mb-4">Welcome to DealPoint</h2>
+            <p class="text-xl mb-8">Your premier destination for outsourcing properties, crafting stunning websites, and more at unbeatable rates.</p>
+            <a href="#contact" class="inline-block bg-teal-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-teal-700 hover-scale">Get Started</a>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-teal-400 mb-12">Our Services</h2>
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-teal-400 mb-12">Our Services</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Property Outsourcing -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl hover-scale">
+                <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl hover-scale">
                     <h3 class="text-xl font-semibold text-teal-400 mb-4">Property Outsourcing</h3>
-                    <p class="text-gray-300">Streamline your property management with our expert outsourcing services, saving you time and costs.</p>
+                    <p class="text-gray-400">Streamline your property management with our expert outsourcing services, saving you time and costs.</p>
                 </div>
-                <!-- Website Development -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl hover-scale">
+                <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl hover-scale">
                     <h3 class="text-xl font-semibold text-teal-400 mb-4">Website Development</h3>
-                    <p class="text-gray-300">Get custom, responsive websites tailored to your business needs at unbeatable rates.</p>
+                    <p class="text-gray-400">Get custom, responsive websites tailored to your business needs at unbeatable rates.</p>
                 </div>
-                <!-- Business Solutions -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl hover-scale">
+                <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl hover-scale">
                     <h3 class="text-xl font-semibold text-teal-400 mb-4">Business Solutions</h3>
-                    <p class="text-gray-300">From marketing to operations, we offer comprehensive solutions to grow your business.</p>
+                    <p class="text-gray-400">From marketing to operations, we offer comprehensive solutions to grow your business.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="bg-gray-800 py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-teal-400 mb-12">About DealPoint</h2>
-            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">At DealPoint, we specialize in delivering top-notch outsourcing services, website development, and business solutions at the best rates. Our mission is to help businesses thrive by providing cost-effective, high-quality services tailored to your needs.</p>
+    <section id="about" class="bg-gray-900 py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-teal-400 mb-12">About DealPoint</h2>
+            <p class="text-lg text-gray-400">At DealPoint, we specialize in delivering top-notch outsourcing services, website development, and business solutions at the best rates. Our mission is to help businesses thrive by providing cost-effective, high-quality services tailored to your needs.</p>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-teal-400 mb-12">Get in Touch</h2>
-            <div class="max-w-lg mx-auto">
-                <div>
-                    <label for="name" class="block text-gray-300 font-semibold mb-2">Name</label>
-                    <input type="text" id="name" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 smooth-transition" placeholder="Your Name">
-                </div>
-                <div class="mt-4">
-                    <label for="email" class="block text-gray-300 font-semibold mb-2">Email</label>
-                    <input type="email" id="email" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 smooth-transition" placeholder="Your Email">
-                </div>
-                <div class="mt-4">
-                    <label for="message" class="block text-gray-300 font-semibold mb-2">Message</label>
-                    <textarea id="message" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 smooth-transition" rows="5" placeholder="Your Message"></textarea>
-                </div>
-                <div class="mt-6 text-center">
-                    <button id="submit-contact" class="bg-teal-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-teal-600 hover-scale">Send Message</button>
-                </div>
-            </div>
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-teal-400 mb-8">Get in Touch</h2>
+            <p class="text-lg text-gray-400 mb-4">We’d love to hear from you. Reach out directly at:contact@dealpoint.forsale</p>
+            <a href="mailto:contact@dealpoint.com" class="text-teal-400 text-xl font-semibold underline hover:text-teal-300 smooth-transition">contact@dealpoint.com</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>© 2025 DealPoint. All rights reserved.</p>
-        </div>
+    <footer class="bg-black text-gray-500 py-8 text-center">
+        <p>© 2025 DealPoint. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Contact Form Submission
-        const submitButton = document.getElementById('submit-contact');
-        submitButton.addEventListener('click', () => {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            if (name && email && message) {
-                alert('Thank you for your message! We will get back to you soon.');
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('message').value = '';
-            } else {
-                alert('Please fill out all fields.');
-            }
-        });
     </script>
+</body>
+</html>

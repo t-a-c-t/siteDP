@@ -20,6 +20,9 @@
     .hover-scale:hover {
       transform: scale(1.05);
     }
+    .glow {
+      box-shadow: 0 0 15px #14b8a6, 0 0 30px #14b8a6, 0 0 45px #14b8a6;
+    }
   </style>
 </head>
 <body>
@@ -31,6 +34,7 @@
     <div class="hidden sm:flex space-x-8">
       <a href="#home" class="hover:text-teal-400">Home</a>
       <a href="#services" class="hover:text-teal-400">Services</a>
+      <a href="#clients" class="hover:text-teal-400">Clients</a>
       <a href="#about" class="hover:text-teal-400">About</a>
       <a href="#contact" class="hover:text-teal-400">Contact</a>
     </div>
@@ -44,6 +48,7 @@
   <div id="mobile-menu" class="hidden sm:hidden bg-black px-4 pt-2 pb-3 space-y-1">
     <a href="#home" class="block hover:text-teal-400">Home</a>
     <a href="#services" class="block hover:text-teal-400">Services</a>
+    <a href="#clients" class="block hover:text-teal-400">Clients</a>
     <a href="#about" class="block hover:text-teal-400">About</a>
     <a href="#contact" class="block hover:text-teal-400">Contact</a>
   </div>
@@ -91,18 +96,27 @@
   </div>
 </section>
 
+<!-- Clients -->
+<section id="clients" class="bg-gray-800 py-24">
+  <div class="max-w-5xl mx-auto px-4 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-teal-400 mb-8">Clients We've Worked With</h2>
+    <div class="bg-gray-900 p-8 rounded-3xl glow shadow-2xl inline-block transition-all hover:scale-105">
+      <h3 class="text-3xl font-semibold mb-4">Digital LifeLine</h3>
+      <p class="text-gray-300 mb-6 max-w-md mx-auto">Helping communities stay connected through tech access, education, and ongoing support. A partner in making digital life accessible to all.</p>
+      <a href="https://digitallifeline.uk" target="_blank"
+         class="inline-block bg-teal-500 text-white font-medium py-2 px-6 rounded-full hover:bg-teal-600 hover-scale">
+        Visit Site
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- About -->
 <section id="about" class="bg-gray-900 py-24">
   <div class="max-w-5xl mx-auto px-4 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-teal-400 mb-8">About Us</h2>
     <p class="text-lg text-gray-400 leading-relaxed">DealPoint was born to simplify how businesses outsource, build, and grow.
       Whether you’re scaling a property portfolio or need a killer digital presence, we deliver creative and reliable solutions. We’re now expanding into AI-based tools to unlock your next level.</p>
-    <div class="mt-12 flex justify-center gap-6 flex-wrap">
-      <img src="https://images.unsplash.com/photo-1581091870622-6a7e89fa9fdd" alt="Code"
-           class="w-40 h-32 object-cover rounded-lg shadow-md hover-scale"/>
-      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367f" alt="Workspace"
-           class="w-40 h-32 object-cover rounded-lg shadow-md hover-scale"/>
-    </div>
   </div>
 </section>
 

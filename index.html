@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -108,12 +109,60 @@
   <a href="mailto:contact@dealpoint.forsale" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition" data-aos="fade-up" data-aos-delay="200">contact@dealpoint.forsale</a>
 </section>
 
+<!-- AI Features -->
+<section class="py-24 bg-gray-900 px-6 text-center">
+  <h2 class="text-4xl font-bold text-teal-400 mb-8" data-aos="fade-up">AI Features</h2>
+
+  <!-- Chatbot -->
+  <button onclick="openChat()" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition mb-6">Chat with Us</button>
+
+  <!-- Speech-to-Text -->
+  <button onclick="startSpeechRecognition()" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition mb-6">Speak Now</button>
+
+  <!-- Text-to-Speech -->
+  <input type="text" id="text-to-speak" placeholder="Enter text to speak" />
+  <button onclick="speakText()" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition mb-6">Speak Text</button>
+
+  <!-- Text Summarizer (Basic Example) -->
+  <input type="text" id="summarizerText" placeholder="Enter text to summarize" />
+  <button onclick="summarizeText()" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition mb-6">Summarize Text</button>
+</section>
+
 <footer class="bg-black py-6 text-center text-gray-500 text-sm">
   &copy; 2025 DealPoint. All rights reserved.
 </footer>
 
 <script>
-  AOS.init({ duration: 1000, once: true });
+  // AI Feature Scripts
+
+  function openChat() {
+    alert("Chatbot feature coming soon!");
+  }
+
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+  function startSpeechRecognition() {
+    recognition.start();
+  }
+
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    alert('You said: ' + transcript);
+  };
+
+  function speakText() {
+    const text = document.getElementById('text-to-speak').value;
+    const speech = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(speech);
+  }
+
+  function summarizeText() {
+    const text = document.getElementById('summarizerText').value;
+
+    // Basic summarization: just truncating text to 50 words for simplicity
+    const summary = text.split(' ').slice(0, 50).join(' ') + (text.split(' ').length > 50 ? '...' : '');
+    alert('Summary: ' + summary);
+  }
 </script>
 
 </body>

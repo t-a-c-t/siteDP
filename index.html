@@ -1,19 +1,21 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MemHook Cheats - A showcase platform for gaming enhancements, built for researchers and testers." />
   <title data-i18n="title">MH Cheats</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #00bfff;
-      --primary-dark: #0077cc;
-      --secondary: #ff3e7f;
-      --bg-dark: #0a0f1e;
-      --bg-darker: #02040a;
-      --text-light: #ffffff;
-      --text-dim: #a0a0a0;
+      --primary: #3b4ba6; /* Lightened blue */
+      --primary-dark: #1e2a6b; /* Lightened dark blue */
+      --secondary: #9575cd; /* Lightened secondary purple */
+      --bg-dark: #0a0e2a; /* Slightly lighter background */
+      --bg-darker: #05071a; /* Slightly lighter dark background */
+      --text-light: #f5f5f5;
+      --text-dim: #b0b0b0;
+      --glow-color: rgba(59, 75, 166, 0.4); /* Subtle glow color */
     }
 
     * {
@@ -40,44 +42,60 @@
       pointer-events: none;
       z-index: 0;
       background: 
-        radial-gradient(circle at 50% 50%, rgba(0,191,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255,62,127,0.1) 0%, transparent 50%);
+        radial-gradient(circle at 50% 50%, rgba(59,75,166,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59,75,166,0.15) 0%, transparent 50%);
+      animation: subtle-pulse 8s ease-in-out infinite;
     }
 
     header {
-      background: rgba(2, 4, 10, 0.95);
-      padding: 1.5rem;
+      background: rgba(5, 7, 26, 0.95);
+      padding: 1.5rem 2rem;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      min-height: 100px;
+      box-shadow: 0 2px 10px var(--glow-color);
     }
 
     .logo-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .logo-container img {
+      height: 60px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
+      box-shadow: 0 0 20px var(--glow-color);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container img:hover {
+      transform: scale(1.05);
     }
 
     .logo-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 800;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 20px rgba(0,191,255,0.3);
+      text-shadow: 0 0 15px var(--glow-color);
     }
 
     nav {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
     }
 
@@ -85,45 +103,38 @@
       color: var(--text-light);
       text-decoration: none;
       font-weight: 600;
-      position: relative;
-      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      padding: 0.6rem 1.2rem;
       transition: all 0.3s ease;
+      border-radius: 0.5rem;
     }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 10px var(--glow-color);
     }
 
     .language-selector {
       position: absolute;
-      right: 2rem;
-      top: 1.5rem;
+      right: 2.5rem;
+      top: 1.8rem;
     }
 
     .language-selector select {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
       color: var(--text-light);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.6rem 1rem;
+      border-radius: 0.6rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 0 8px var(--glow-color);
     }
 
     .language-selector select:hover {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 12px var(--glow-color);
     }
 
     .hero {
@@ -133,64 +144,72 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
                   url('https://media.tenor.com/eN1YOqFgD60AAAAd/hacker-code.gif') no-repeat center center/cover;
-      margin-top: 80px;
+      margin-top: 100px;
     }
 
     .hero-content {
       text-align: center;
       z-index: 1;
-      padding: 2rem;
-      max-width: 800px;
+      padding: 2.5rem;
+      max-width: 900px;
+      background: rgba(5,7,26,0.3);
+      border-radius: 1rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 25px var(--glow-color);
     }
 
     .hero h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      margin-bottom: 1.8rem;
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 20px var(--glow-color);
+      animation: glow 2.5s ease-in-out infinite alternate;
     }
 
     .section {
-      padding: 5rem 2rem;
+      padding: 6rem 2.5rem;
       position: relative;
       z-index: 1;
     }
 
     .section h2 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-size: 3rem;
+      margin-bottom: 2.5rem;
       text-align: center;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 0 15px var(--glow-color);
     }
 
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+      padding: 2.5rem;
     }
 
     .video-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 1rem;
+      background: rgba(255,255,255,0.08);
+      border-radius: 1.2rem;
       overflow: hidden;
-      transition: transform 0.3s ease;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 0 15px var(--glow-color);
     }
 
     .video-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-12px);
+      box-shadow: 0 0 25px var(--glow-color);
     }
 
     .video-card video {
@@ -200,23 +219,29 @@
     }
 
     .video-info {
-      padding: 1.5rem;
+      padding: 1.8rem;
     }
 
     .status-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem;
     }
 
     .status-item {
-      background: rgba(255,255,255,0.05);
-      padding: 1.5rem;
-      border-radius: 1rem;
+      background: rgba(255,255,255,0.08);
+      padding: 1.8rem;
+      border-radius: 1.2rem;
       text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 0 15px var(--glow-color);
+      transition: all 0.3s ease;
+    }
+
+    .status-item:hover {
+      box-shadow: 0 0 25px var(--glow-color);
     }
 
     .status-ok {
@@ -233,79 +258,142 @@
 
     .buy-button {
       display: inline-block;
-      padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
       color: white;
       text-decoration: none;
-      border-radius: 2rem;
+      border-radius: 2.5rem;
       font-weight: 600;
+      font-size: 1.1rem;
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,191,255,0.3);
+      box-shadow: 0 5px 20px var(--glow-color);
     }
 
     .buy-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,191,255,0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--glow-color);
     }
 
     footer {
-      background: rgba(2,4,10,0.95);
-      padding: 3rem 2rem;
+      background: rgba(5,7,26,0.95);
+      padding: 3.5rem 2.5rem;
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 -2px 10px var(--glow-color);
     }
 
     #topBtn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      bottom: 2.5rem;
+      right: 2.5rem;
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
       color: white;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 5px 15px rgba(0,191,255,0.3);
+      font-size: 1.8rem;
+      box-shadow: 0 5px 20px var(--glow-color);
       transition: all 0.3s ease;
     }
 
     #topBtn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,191,255,0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--glow-color);
     }
 
     @keyframes glow {
       from {
-        text-shadow: 0 0 20px rgba(0,191,255,0.5);
+        text-shadow: 0 0 15px var(--glow-color);
       }
       to {
-        text-shadow: 0 0 30px rgba(0,191,255,0.8);
+        text-shadow: 0 0 25px var(--glow-color);
       }
+    }
+
+    @keyframes subtle-pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
     }
 
     @media (max-width: 768px) {
       .logo-text {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       nav {
-        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+
+      nav a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
       }
 
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
 
       .language-selector {
-        right: 1rem;
-        top: 1rem;
+        right: 1.5rem;
+        top: 1.2rem;
+      }
+
+      .language-selector select {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .section h2 {
+        font-size: 2.2rem;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .buy-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      #topBtn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-container {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .section {
+        padding: 4rem 1.5rem;
       }
     }
   </style>
@@ -315,7 +403,7 @@
 
   <header>
     <div class="logo-container">
-      <img src="https://i.ibb.co/HDVHdPc2/MH.png" alt="MH Logo" style="height: 50px; width: auto;" />
+      <img src="https://i.ibb.co/HDVHdPc2/MH.png" alt="MemHook Cheats Logo" width="60" height="60" />
       <span class="logo-text" data-i18n="header.title">MemHook Cheats</span>
     </div>
     <div class="language-selector">
@@ -397,7 +485,7 @@
 
   <section class="section" id="about">
     <h2 data-i18n="about.title">About MH</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto;" data-i18n="about.desc">
+    <p style="text-align: center; max-width: 900px; margin: 0 auto;" data-i18n="about.desc">
       MemHook is a cheat media showcase platform, built for researchers and testers. 
       Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically.
     </p>
@@ -407,7 +495,7 @@
     <h2 data-i18n="contact.title">Contact Us</h2>
     <div style="text-align: center;">
       <p data-i18n="contact.desc">Join our Discord for updates, access, and community support:</p>
-      <a href="#" class="buy-button" style="margin-top: 1rem;" data-i18n="contact.button">Join Discord</a>
+      <a href="https://discord.gg/placeholder" class="buy-button" style="margin-top: 1rem;" data-i18n="contact.button">Join Discord</a>
     </div>
   </section>
 
@@ -423,7 +511,7 @@
   <script src="https://unpkg.com/i18next-browser-languagedetector@8.0.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
 
   <script>
-    // Translation resources (embedded for simplicity)
+    // Translation resources
     const resources = {
       en: {
         translation: {
@@ -705,10 +793,13 @@
         fallbackLng: 'en',
         debug: false,
         interpolation: {
-          escapeValue: false // React already escapes
+          escapeValue: false
         }
       }, function(err, t) {
-        if (err) return console.error(err);
+        if (err) {
+          console.error('i18next initialization error:', err);
+          return;
+        }
         updateContent();
       });
 
@@ -716,9 +807,14 @@
     function updateContent() {
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        element.innerHTML = i18next.t(key);
+        const translation = i18next.t(key);
+        if (translation) {
+          element.innerHTML = translation;
+        } else {
+          console.warn(`Translation missing for key: ${key}`);
+        }
       });
-      document.title = i18next.t('title');
+      document.title = i18next.t('title') || 'MH Cheats';
     }
 
     // Language selector event listener

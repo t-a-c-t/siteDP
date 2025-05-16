@@ -1,210 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DealPoint - Outsourcing & Web Solutions</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <title>MH Cheats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Inter', sans-serif;
-      background: #121212;
+      background: radial-gradient(circle at top center, #0a0f1e 0%, #02040a 100%);
       color: white;
+      font-family: 'Orbitron', sans-serif;
       overflow-x: hidden;
     }
-
-    /* Gradient text animation */
-    .gradient-text {
-      background: linear-gradient(90deg, #14b8a6, #6366f1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: pulse 4s infinite alternate;
-    }
-
-    @keyframes pulse {
-      from {
-        filter: brightness(1);
-      }
-
-      to {
-        filter: brightness(1.5);
-      }
-    }
-
-    /* Glassmorphism card design */
-    .glass-card {
-      background-color: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    header {
+      background: rgba(0, 0, 0, 0.9);
       padding: 20px;
-      margin: 10px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
     }
-
-    .glass-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    header h1 {
+      font-size: 3.5rem;
+      color: #00bfff;
+      letter-spacing: 2px;
     }
-
-    /* Button design */
-    .btn-primary {
-      background-color: #14b8a6;
-      color: white;
-      padding: 12px 36px;
-      border-radius: 50px;
+    nav {
+      margin-top: 15px;
+    }
+    nav a {
+      margin: 0 20px;
+      color: #ffffff;
+      text-decoration: none;
       font-weight: bold;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
+      position: relative;
     }
-
-    .btn-primary:hover {
-      background-color: #6366f1;
-      transform: scale(1.1);
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #00bfff;
+      transition: width 0.3s ease-in-out;
     }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #14b8a6;
-      margin-bottom: 1rem;
+    nav a:hover::after {
+      width: 100%;
     }
-
-    .sub-section-title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #6366f1;
+    .hero {
+      background: url('/mnt/data/5030f70b-b5e3-4b46-b3a8-8362b78fef11.png') no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 2px 2px 10px black;
+      position: relative;
     }
-
-    .bg-dark {
-      background-color: #1f2937;
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
     }
-
-    .bg-dark-light {
-      background-color: #2d3748;
+    .hero h2 {
+      font-size: 3.5rem;
+      color: #ffffff;
+      padding: 20px;
+      z-index: 2;
+      position: relative;
+      animation: fadeIn 2s ease-in-out;
     }
-
-    .text-light {
-      color: #e5e7eb;
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
-
-    /* Parallax effect on the hero section */
-    .hero-background {
-      background-image: url('https://source.unsplash.com/random/1600x900');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+    .section {
+      padding: 80px 20px;
+      text-align: center;
     }
-
-    .fade-up {
-      animation: fadeInUp 1s ease-out;
+    .section h3 {
+      font-size: 2.5rem;
+      color: #00bfff;
+      margin-bottom: 30px;
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+    .video-card {
+      background: #0d121f;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00bfff44;
+      transition: transform 0.3s;
+    }
+    .video-card:hover {
+      transform: scale(1.03);
+    }
+    .video-card video {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .video-card p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #c0e8ff;
+    }
+    .status {
+      font-size: 1.2rem;
+      line-height: 2rem;
+      color: #ffffffbb;
+    }
+    .status span {
+      display: inline-block;
+      margin: 5px;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    .status .ok { background: #007f00; color: #baffba; }
+    .status .warn { background: #7f5f00; color: #ffecb3; }
+    .status .fail { background: #7f0000; color: #ffc0c0; }
+    .buy-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #00bfff;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .buy-link:hover {
+      background: #0099cc;
+    }
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    a {
+      color: #00bfff;
     }
   </style>
 </head>
+<body>
+  <header>
+    <h1>MemHook Cheats</h1>
+    <nav>
+      <a href="#cheats">Cheats</a>
+      <a href="#status">Status</a>
+      <a href="#buy">Buy</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<body class="antialiased">
+  <div class="hero">
+    <h2>Next-Level Cheating For You</h2>
+  </div>
 
-  <!-- Navbar -->
-  <nav class="bg-black/80 backdrop-blur sticky top-0 z-50 py-4 px-6 flex justify-between items-center shadow-lg transition-all ease-in-out hover:bg-teal-700">
-    <div class="text-3xl font-bold text-teal-400 transition-all hover:text-teal-300">DealPoint</div>
-    <div class="hidden md:flex space-x-8 text-lg">
-      <a href="#home" class="hover:text-teal-400 transition">Home</a>
-      <a href="#services" class="hover:text-teal-400 transition">Services</a>
-      <a href="#clients" class="hover:text-teal-400 transition">Clients</a>
-      <a href="#about" class="hover:text-teal-400 transition">About</a>
-      <a href="#contact" class="hover:text-teal-400 transition">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden hero-background py-40 px-6">
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative z-10 max-w-4xl text-center" data-aos="fade-up">
-      <h1 class="text-5xl md:text-7xl font-extrabold gradient-text mb-6">Next-Gen Outsourcing & Web Solutions</h1>
-      <p class="text-xl md:text-2xl text-gray-200 mb-8">We help businesses scale with cutting-edge websites, automation & AI tools.</p>
-      <a href="#contact" class="btn-primary">Let’s Talk</a>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="py-24 bg-dark-light px-6">
-    <h2 class="section-title text-center" data-aos="fade-up">Our Services</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-      <div class="glass-card p-6" data-aos="fade-up">
-        <h3 class="sub-section-title mb-4">Property Outsourcing</h3>
-        <p class="text-light">Streamline property management, tenant communication & portfolio oversight seamlessly.</p>
+  <section class="section" id="cheats">
+    <h3>Featured Cheats</h3>
+    <div class="video-grid">
+      <div class="video-card">
+        <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+        <p>Showcase 1</p>
       </div>
-      <div class="glass-card p-6" data-aos="fade-up" data-aos-delay="100">
-        <h3 class="sub-section-title mb-4">Website Development</h3>
-        <p class="text-light">Fully responsive, high-performance sites customized to your brand & goals.</p>
+      <div class="video-card">
+        <video controls src="https://www.w3schools.com/html/movie.mp4"></video>
+        <p>Showcase 2</p>
       </div>
-      <div class="glass-card p-6" data-aos="fade-up" data-aos-delay="200">
-        <h3 class="sub-section-title mb-4">Business Automation</h3>
-        <p class="text-light">Boost productivity with workflow automation, CRM integrations & process optimization.</p>
-      </div>
-      <div class="glass-card p-6" data-aos="fade-up" data-aos-delay="300">
-        <h3 class="sub-section-title mb-4">Tech Support</h3>
-        <p class="text-light">24/7 tech support & maintenance for apps, websites, and digital platforms.</p>
-      </div>
-      <div class="glass-card p-6" data-aos="fade-up" data-aos-delay="400">
-        <h3 class="sub-section-title mb-4">AI & Analytics</h3>
-        <p class="text-light">Custom AI solutions & real-time analytics to supercharge your growth.</p>
+      <div class="video-card">
+        <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+        <p>Showcase3 (PS tact is daddy)/p>
       </div>
     </div>
   </section>
 
-  <!-- Clients Section -->
-  <section id="clients" class="py-24 bg-dark px-6 text-center">
-    <h2 class="section-title mb-12" data-aos="fade-up">Clients We've Worked With</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      <div class="glass-card p-6" data-aos="fade-up">
-        <h3 class="text-2xl font-semibold mb-2">Digital LifeLine</h3>
-        <p class="text-light mb-4">Bridging the digital divide through tech access & community empowerment.</p>
-        <a href="https://digitallifeline.uk" target="_blank" class="inline-block text-teal-400 hover:text-teal-200 font-semibold">Visit Site</a>
-      </div>
+  <section class="section" id="status">
+    <h3>Cheat Status</h3>
+    <div class="status">
+      <span class="ok">✅ B06 V2 Cheat - Undetected</span>
+      <span class="ok">✅ CSGO Cheat - Undetected</span>
+      <span class="warn">⚠️ Luna Likes Cock - Updating</span>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-24 bg-dark-light px-6 text-center">
-    <h2 class="section-title mb-8" data-aos="fade-up">About DealPoint</h2>
-    <p class="max-w-3xl mx-auto text-lg text-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-      At DealPoint, we empower businesses with cutting-edge outsourcing and tech solutions that help you scale effortlessly. Our focus spans property outsourcing, website development, business automation, and AI-driven innovations. Trusted by top brands and ready to elevate yours next.
-    </p>
+  <section class="section" id="buy">
+    <h3>Buy Cheats</h3>
+    <p><strong>B06 External V2</strong> - The Best B06 Cheat Around Buy Below</p>
+    <a class="buy-link" href="https://macheats.sellpass.io" target="_blank">Purchase B06 External V2</a>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 bg-dark px-6 text-center">
-    <h2 class="section-title mb-8" data-aos="fade-up">Get in Touch</h2>
-    <p class="text-lg text-light mb-4" data-aos="fade-up" data-aos-delay="100">We’d love to collaborate. Reach out to start your journey with us.</p>
-    <a href="mailto:contact@dealpoint.forsale" class="btn-primary" data-aos="fade-up" data-aos-delay="200">contact@dealpoint.forsale</a>
+  <section class="section" id="about">
+    <h3>About MH</h3>
+    <p>MemHook is a cheat media showcase platform, built for researchers and testers. Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically.</p>
   </section>
 
-  <footer class="bg-black py-6 text-center text-gray-500 text-sm">
-    &copy; 2025 DealPoint. All rights reserved.
+  <section class="section" id="contact">
+    <h3>Contact Us</h3>
+    <p>Join our Discord for updates, access, and community support:</p>
+    <p><a href="#">discord.gg/LUNAISAFAG</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MH Cheats. Content shown is for educational and research purposes only. All rights reserved.</p>
+    <p>Website designed by <a href="https://www.dealpoint.forsale" target="_blank">DealPoint</a>.</p>
   </footer>
-
-  <script>
-    // Initialize AOS animation library
-    AOS.init({ duration: 1000, once: true });
-  </script>
-
 </body>
-
 </html>

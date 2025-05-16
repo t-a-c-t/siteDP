@@ -3,238 +3,735 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MH Cheats</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <title data-i18n="title">MH Cheats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #00bfff;
+      --primary-dark: #0077cc;
+      --secondary: #ff3e7f;
+      --bg-dark: #0a0f1e;
+      --bg-darker: #02040a;
+      --text-light: #ffffff;
+      --text-dim: #a0a0a0;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
-    body {
-      background: radial-gradient(circle at top center, #0a0f1e 0%, #02040a 100%);
-      color: white;
-      font-family: 'Orbitron', sans-serif;
-      overflow-x: hidden;
+
+    html, body {
+      height: 100%;
+      background: radial-gradient(circle at top center, var(--bg-dark) 0%, var(--bg-darker) 100%);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
     }
-    header {
-      background: rgba(0, 0, 0, 0.9);
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-    }
-    header h1 {
-      font-size: 3.5rem;
-      color: #00bfff;
-      letter-spacing: 2px;
-      /* Dark purple outer glow */
-      text-shadow:
-        0 0 8px #3a0070,
-        0 0 15px #4b0082,
-        0 0 20px #5a00b8;
-    }
-    nav {
-      margin-top: 15px;
-    }
-    nav a {
-      margin: 0 20px;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: #00bfff;
-      transition: width 0.3s ease-in-out;
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
-    .logo {
-      height: 50px;
-      user-select: none;
-    }
-    .hero {
-      background: url('/mnt/data/5030f70b-b5e3-4b46-b3a8-8362b78fef11.png') no-repeat center center/cover;
-      height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-shadow: 2px 2px 10px black;
-      position: relative;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
+
+    .particles {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(0,191,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,62,127,0.1) 0%, transparent 50%);
     }
-    .hero h2 {
-      font-size: 3.5rem;
-      color: #ffffff;
-      padding: 20px;
-      z-index: 2;
-      position: relative;
-      animation: fadeIn 2s ease-in-out;
+
+    header {
+      background: rgba(2, 4, 10, 0.95);
+      padding: 1.5rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
-    .section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .section h3 {
+
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
       font-size: 2.5rem;
-      color: #00bfff;
-      margin-bottom: 30px;
+      font-weight: 800;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(0,191,255,0.3);
     }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .language-selector {
+      position: absolute;
+      right: 2rem;
+      top: 1.5rem;
+    }
+
+    .language-selector select {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-light);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .language-selector select:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('https://media.tenor.com/eN1YOqFgD60AAAAd/hacker-code.gif') no-repeat center center/cover;
+      margin-top: 80px;
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 1;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
     }
+
     .video-card {
-      background: #0d121f;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #00bfff44;
-      transition: transform 0.3s;
+      background: rgba(255,255,255,0.05);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
+
     .video-card:hover {
-      transform: scale(1.03);
+      transform: translateY(-10px);
     }
+
     .video-card video {
       width: 100%;
-      border-radius: 10px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
     }
-    .video-card p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #c0e8ff;
+
+    .video-info {
+      padding: 1.5rem;
     }
-    .status {
-      font-size: 1.2rem;
-      line-height: 2rem;
-      color: #ffffffbb;
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
     }
-    .status span {
-      display: inline-block;
-      margin: 5px;
-      padding: 5px 10px;
-      border-radius: 8px;
-    }
-    .status .ok { background: #007f00; color: #baffba; }
-    .status .warn { background: #7f5f00; color: #ffecb3; }
-    .status .fail { background: #7f0000; color: #ffc0c0; }
-    .buy-link {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #00bfff;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .buy-link:hover {
-      background: #0099cc;
-    }
-    footer {
-      background: #000;
+
+    .status-item {
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+      border-radius: 1rem;
       text-align: center;
-      padding: 30px 20px;
-      font-size: 0.9rem;
-      color: #888;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    a {
-      color: #00bfff;
+
+    .status-ok {
+      color: #00ff00;
+    }
+
+    .status-warn {
+      color: #ffaa00;
+    }
+
+    .status-fail {
+      color: #ff0000;
+    }
+
+    .buy-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,191,255,0.3);
+    }
+
+    .buy-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,191,255,0.4);
+    }
+
+    footer {
+      background: rgba(2,4,10,0.95);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    #topBtn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,191,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    #topBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,191,255,0.4);
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 20px rgba(0,191,255,0.5);
+      }
+      to {
+        text-shadow: 0 0 30px rgba(0,191,255,0.8);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logo-text {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .language-selector {
+        right: 1rem;
+        top: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <a href="https://ibb.co/HDVHdPc2" target="_blank" rel="noopener noreferrer">
-      <img src="https://i.ibb.co/HDVHdPc2/MH.png" alt="MH Logo" class="logo" />
-    </a>
-    <h1>MemHook Cheats</h1>
-  </header>
-  <nav>
-    <a href="#cheats">Cheats</a>
-    <a href="#status">Status</a>
-    <a href="#buy">Buy</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="particles"></div>
 
-  <div class="hero">
-    <h2>Next-Level Cheating For You</h2>
-  </div>
+  <header>
+    <div class="logo-container">
+      <img src="https://i.ibb.co/HDVHdPc2/MH.png" alt="MH Logo" style="height: 50px; width: auto;" />
+      <span class="logo-text" data-i18n="header.title">MemHook Cheats</span>
+    </div>
+    <div class="language-selector">
+      <select id="language-select">
+        <option value="en" data-i18n="language.english">English</option>
+        <option value="es" data-i18n="language.spanish">Spanish</option>
+        <option value="fr" data-i18n="language.french">French</option>
+        <option value="de" data-i18n="language.german">German</option>
+        <option value="zh" data-i18n="language.chinese">Chinese</option>
+      </select>
+    </div>
+    <nav>
+      <a href="#cheats" data-i18n="nav.cheats">Cheats</a>
+      <a href="#status" data-i18n="nav.status">Status</a>
+      <a href="#buy" data-i18n="nav.buy">Buy</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 data-i18n="hero.title">Next-Level Cheating For You</h1>
+    </div>
+  </section>
 
   <section class="section" id="cheats">
-    <h3>Featured Cheats</h3>
+    <h2 data-i18n="cheats.title">Featured Cheats</h2>
     <div class="video-grid">
       <div class="video-card">
         <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-        <p>Showcase 1</p>
+        <div class="video-info">
+          <h3 data-i18n="cheats.showcase1.title">Showcase 1</h3>
+          <p data-i18n="cheats.showcase1.desc">Experience next-level gameplay enhancement</p>
+        </div>
       </div>
       <div class="video-card">
         <video controls src="https://www.w3schools.com/html/movie.mp4"></video>
-        <p>Showcase 2</p>
+        <div class="video-info">
+          <h3 data-i18n="cheats.showcase2.title">Showcase 2</h3>
+          <p data-i18n="cheats.showcase2.desc">Advanced features and capabilities</p>
+        </div>
       </div>
       <div class="video-card">
         <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-        <p>Showcase 3 (PS tact is daddy)</p>
+        <div class="video-info">
+          <h3 data-i18n="cheats.showcase3.title">Showcase 3</h3>
+          <p data-i18n="cheats.showcase3.desc">Ultimate gaming advantage</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section" id="status">
-    <h3>Cheat Status</h3>
-    <div class="status">
-      <span class="ok">✅ B06 V2 Cheat - Undetected</span>
-      <span class="ok">✅ CSGO Cheat - Undetected</span>
-      <span class="warn">⚠️ Luna Likes Cock - Updating</span>
+    <h2 data-i18n="status.title">Cheat Status</h2>
+    <div class="status-grid">
+      <div class="status-item">
+        <span class="status-ok" data-i18n="status.b06">✅ B06 V2 Cheat</span>
+        <p data-i18n="status.b06.status">Undetected</p>
+      </div>
+      <div class="status-item">
+        <span class="status-ok" data-i18n="status.csgo">✅ CSGO Cheat</span>
+        <p data-i18n="status.csgo.status">Undetected</p>
+      </div>
+      <div class="status-item">
+        <span class="status-warn" data-i18n="status.luna">⚠️ Luna's Cheat</span>
+        <p data-i18n="status.luna.status">Updating</p>
+      </div>
     </div>
   </section>
 
   <section class="section" id="buy">
-    <h3>Buy Cheats</h3>
-    <p><strong>B06 External V2</strong> - The Best B06 Cheat Around Buy Below</p>
-    <a class="buy-link" href="https://macheats.sellpass.io" target="_blank">Purchase B06 External V2</a>
+    <h2 data-i18n="buy.title">Buy Cheats</h2>
+    <div style="text-align: center;">
+      <p style="margin-bottom: 2rem;" data-i18n="buy.b06.desc"><strong>B06 External V2</strong> - The Best B06 Cheat Around</p>
+      <a class="buy-button" href="https://macheats.sellpass.io" target="_blank" data-i18n="buy.b06.button">Purchase B06 External V2</a>
+    </div>
   </section>
 
   <section class="section" id="about">
-    <h3>About MH</h3>
-    <p>MemHook is a cheat media showcase platform, built for researchers and testers. Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically.</p>
+    <h2 data-i18n="about.title">About MH</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto;" data-i18n="about.desc">
+      MemHook is a cheat media showcase platform, built for researchers and testers. 
+      Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically.
+    </p>
   </section>
 
   <section class="section" id="contact">
-    <h3>Contact Us</h3>
-    <p>Join our Discord for updates, access, and community support:</p>
-    <p><a href="#">discord.gg/LUNAISAFAG</a></p>
+    <h2 data-i18n="contact.title">Contact Us</h2>
+    <div style="text-align: center;">
+      <p data-i18n="contact.desc">Join our Discord for updates, access, and community support:</p>
+      <a href="#" class="buy-button" style="margin-top: 1rem;" data-i18n="contact.button">Join Discord</a>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 MH Cheats. Content shown is for educational and research purposes only. All rights reserved.</p>
-    <p>Website designed by <a href="https://www.dealpoint.forsale" target="_blank">DealPoint</a>.</p>
+    <p data-i18n="footer.copyright">© 2025 MH Cheats. Content shown is for educational and research purposes only.</p>
+    <p data-i18n="footer.designed">Website designed by <a href="https://www.dealpoint.forsale" target="_blank">DealPoint</a></p>
   </footer>
+
+  <button id="topBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+  <!-- i18next Libraries -->
+  <script src="https://unpkg.com/i18next@23.11.5/dist/umd/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@8.0.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+
+  <script>
+    // Translation resources (embedded for simplicity)
+    const resources = {
+      en: {
+        translation: {
+          title: "MH Cheats",
+          header: { title: "MemHook Cheats" },
+          language: {
+            english: "English",
+            spanish: "Spanish",
+            french: "French",
+            german: "German",
+            chinese: "Chinese"
+          },
+          nav: {
+            cheats: "Cheats",
+            status: "Status",
+            buy: "Buy",
+            about: "About",
+            contact: "Contact"
+          },
+          hero: { title: "Next-Level Cheating For You" },
+          cheats: {
+            title: "Featured Cheats",
+            showcase1: { title: "Showcase 1", desc: "Experience next-level gameplay enhancement" },
+            showcase2: { title: "Showcase 2", desc: "Advanced features and capabilities" },
+            showcase3: { title: "Showcase 3", desc: "Ultimate gaming advantage" }
+          },
+          status: {
+            title: "Cheat Status",
+            b06: "✅ B06 V2 Cheat",
+            "b06.status": "Undetected",
+            csgo: "✅ CSGO Cheat",
+            "csgo.status": "Undetected",
+            luna: "⚠️ Luna's Cheat",
+            "luna.status": "Updating"
+          },
+          buy: {
+            title: "Buy Cheats",
+            "b06.desc": "<strong>B06 External V2</strong> - The Best B06 Cheat Around",
+            "b06.button": "Purchase B06 External V2"
+          },
+          about: {
+            title: "About MH",
+            desc: "MemHook is a cheat media showcase platform, built for researchers and testers. Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically."
+          },
+          contact: {
+            title: "Contact Us",
+            desc: "Join our Discord for updates, access, and community support:",
+            button: "Join Discord"
+          },
+          footer: {
+            copyright: "© 2025 MH Cheats. Content shown is for educational and research purposes only.",
+            designed: "Website designed by <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
+          }
+        }
+      },
+      es: {
+        translation: {
+          title: "Trucos MH",
+          header: { title: "Trucos MemHook" },
+          language: {
+            english: "Inglés",
+            spanish: "Español",
+            french: "Francés",
+            german: "Alemán",
+            chinese: "Chino"
+          },
+          nav: {
+            cheats: "Trucos",
+            status: "Estado",
+            buy: "Comprar",
+            about: "Acerca de",
+            contact: "Contacto"
+          },
+          hero: { title: "Trampas de Próximo Nivel para Ti" },
+          cheats: {
+            title: "Trucos Destacados",
+            showcase1: { title: "Demostración 1", desc: "Experimenta mejoras de juego de próximo nivel" },
+            showcase2: { title: "Demostración 2", desc: "Funciones y capacidades avanzadas" },
+            showcase3: { title: "Demostración 3", desc: "Ventaja definitiva en juegos" }
+          },
+          status: {
+            title: "Estado de los Trucos",
+            b06: "✅ Truco B06 V2",
+            "b06.status": "No Detectado",
+            csgo: "✅ Truco CSGO",
+            "csgo.status": "No Detectado",
+            luna: "⚠️ Truco de Luna",
+            "luna.status": "Actualizando"
+          },
+          buy: {
+            title: "Comprar Trucos",
+            "b06.desc": "<strong>B06 Externo V2</strong> - El Mejor Truco B06 Disponible",
+            "b06.button": "Comprar B06 Externo V2"
+          },
+          about: {
+            title: "Acerca de MH",
+            desc: "MemHook es una plataforma de exhibición de medios de trucos, creada para investigadores y probadores. Nuestro objetivo es demostrar métodos de explotación, teoría de bypass y diseño de UI — de manera responsable y ética."
+          },
+          contact: {
+            title: "Contáctanos",
+            desc: "Únete a nuestro Discord para actualizaciones, acceso y soporte comunitario:",
+            button: "Unirse a Discord"
+          },
+          footer: {
+            copyright: "© 2025 Trucos MH. El contenido mostrado es solo para fines educativos y de investigación.",
+            designed: "Sitio web diseñado por <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
+          }
+        }
+      },
+      fr: {
+        translation: {
+          title: "Cheats MH",
+          header: { title: "Cheats MemHook" },
+          language: {
+            english: "Anglais",
+            spanish: "Espagnol",
+            french: "Français",
+            german: "Allemand",
+            chinese: "Chinois"
+          },
+          nav: {
+            cheats: "Cheats",
+            status: "Statut",
+            buy: "Acheter",
+            about: "À propos",
+            contact: "Contact"
+          },
+          hero: { title: "Tricherie de Niveau Supérieur pour Vous" },
+          cheats: {
+            title: "Cheats en Vedette",
+            showcase1: { title: "Vitrine 1", desc: "Découvrez une amélioration de jeu de niveau supérieur" },
+            showcase2: { title: "Vitrine 2", desc: "Fonctionnalités et capacités avancées" },
+            showcase3: { title: "Vitrine 3", desc: "Avantage ultime dans les jeux" }
+          },
+          status: {
+            title: "Statut des Cheats",
+            b06: "✅ Cheat B06 V2",
+            "b06.status": "Non Détecté",
+            csgo: "✅ Cheat CSGO",
+            "csgo.status": "Non Détecté",
+            luna: "⚠️ Cheat de Luna",
+            "luna.status": "En Mise à Jour"
+          },
+          buy: {
+            title: "Acheter des Cheats",
+            "b06.desc": "<strong>B06 Externe V2</strong> - Le Meilleur Cheat B06 Disponible",
+            "b06.button": "Acheter B06 Externe V2"
+          },
+          about: {
+            title: "À propos de MH",
+            desc: "MemHook est une plateforme de présentation de médias de cheats, conçue pour les chercheurs et les testeurs. Notre objectif est de démontrer les méthodes d'exploitation, la théorie de contournement et la conception d'interface utilisateur — de manière responsable et éthique."
+          },
+          contact: {
+            title: "Contactez-nous",
+            desc: "Rejoignez notre Discord pour les mises à jour, l'accès et le soutien communautaire :",
+            button: "Rejoindre Discord"
+          },
+          footer: {
+            copyright: "© 2025 Cheats MH. Le contenu affiché est uniquement à des fins éducatives et de recherche.",
+            designed: "Site web conçu par <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
+          }
+        }
+      },
+      de: {
+        translation: {
+          title: "MH Cheats",
+          header: { title: "MemHook Cheats" },
+          language: {
+            english: "Englisch",
+            spanish: "Spanisch",
+            french: "Französisch",
+            german: "Deutsch",
+            chinese: "Chinesisch"
+          },
+          nav: {
+            cheats: "Cheats",
+            status: "Status",
+            buy: "Kaufen",
+            about: "Über",
+            contact: "Kontakt"
+          },
+          hero: { title: "Cheating auf Höchstem Niveau für Sie" },
+          cheats: {
+            title: "Ausgewählte Cheats",
+            showcase1: { title: "Showcase 1", desc: "Erleben Sie Spielverbesserungen auf höchstem Niveau" },
+            showcase2: { title: "Showcase 2", desc: "Fortgeschrittene Funktionen und Fähigkeiten" },
+            showcase3: { title: "Showcase 3", desc: "Ultimativer Spielvorteil" }
+          },
+          status: {
+            title: "Cheat-Status",
+            b06: "✅ B06 V2 Cheat",
+            "b06.status": "Unentdeckt",
+            csgo: "✅ CSGO Cheat",
+            "csgo.status": "Unentdeckt",
+            luna: "⚠️ Luna's Cheat",
+            "luna.status": "In Aktualisierung"
+          },
+          buy: {
+            title: "Cheats Kaufen",
+            "b06.desc": "<strong>B06 Extern V2</strong> - Der Beste B06 Cheat auf dem Markt",
+            "b06.button": "B06 Extern V2 Kaufen"
+          },
+          about: {
+            title: "Über MH",
+            desc: "MemHook ist eine Plattform zur Präsentation von Cheat-Medien, entwickelt für Forscher und Tester. Unser Ziel ist es, Exploit-Methoden, Bypass-Theorie und UI-Design zu demonstrieren — verantwortungsvoll und ethisch."
+          },
+          contact: {
+            title: "Kontaktieren Sie uns",
+            desc: "Treten Sie unserem Discord bei für Updates, Zugang und Community-Unterstützung:",
+            button: "Discord Beitreten"
+          },
+          footer: {
+            copyright: "© 2025 MH Cheats. Der gezeigte Inhalt dient ausschließlich Bildungs- und Forschungszwecken.",
+            designed: "Website gestaltet von <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
+          }
+        }
+      },
+      zh: {
+        translation: {
+          title: "MH 作弊",
+          header: { title: "MemHook 作弊" },
+          language: {
+            english: "英语",
+            spanish: "西班牙语",
+            french: "法语",
+            german: "德语",
+            chinese: "中文"
+          },
+          nav: {
+            cheats: "作弊",
+            status: "状态",
+            buy: "购买",
+            about: "关于",
+            contact: "联系"
+          },
+          hero: { title: "为您提供下一级作弊体验" },
+          cheats: {
+            title: "特色作弊",
+            showcase1: { title: "展示 1", desc: "体验下一级的游戏增强" },
+            showcase2: { title: "展示 2", desc: "高级功能和能力" },
+            showcase3: { title: "展示 3", desc: "终极游戏优势" }
+          },
+          status: {
+            title: "作弊状态",
+            b06: "✅ B06 V2 作弊",
+            "b06.status": "未被检测",
+            csgo: "✅ CSGO 作弊",
+            "csgo.status": "未被检测",
+            luna: "⚠️ Luna的作弊",
+            "luna.status": "更新中"
+          },
+          buy: {
+            title: "购买作弊",
+            "b06.desc": "<strong>B06 外部 V2</strong> - 市场上最好的B06作弊",
+            "b06.button": "购买 B06 外部 V2"
+          },
+          about: {
+            title: "关于 MH",
+            desc: "MemHook 是一个为研究人员和测试人员构建的作弊媒体展示平台。我们的目标是展示漏洞利用方法、绕过理论和用户界面设计——以负责任和道德的方式。"
+          },
+          contact: {
+            title: "联系我们",
+            desc: "加入我们的 Discord 以获取更新、访问和社区支持：",
+            button: "加入 Discord"
+          },
+          footer: {
+            copyright: "© 2025 MH 作弊。展示的内容仅用于教育和研究目的。",
+            designed: "网站由 <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a> 设计"
+          }
+        }
+      }
+    };
+
+    // Initialize i18next
+    i18next
+      .use(i18nextBrowserLanguageDetector)
+      .init({
+        resources,
+        fallbackLng: 'en',
+        debug: false,
+        interpolation: {
+          escapeValue: false // React already escapes
+        }
+      }, function(err, t) {
+        if (err) return console.error(err);
+        updateContent();
+      });
+
+    // Update content with translations
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        element.innerHTML = i18next.t(key);
+      });
+      document.title = i18next.t('title');
+    }
+
+    // Language selector event listener
+    document.getElementById('language-select').addEventListener('change', (e) => {
+      i18next.changeLanguage(e.target.value, () => {
+        updateContent();
+      });
+    });
+
+    // Initial language detection
+    i18next.on('languageChanged', () => {
+      updateContent();
+    });
+  </script>
 </body>
 </html>

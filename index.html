@@ -1,1162 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MemHook Cheats - The Best Cheats For You." />
-  <title data-i18n="title">MemHook Cheats</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0055FF;
-      --primary-dark: #0033CC;
-      --secondary: #00A3FF;
-      --bg-dark: #010E28;
-      --bg-darker: #000A14;
-      --text-light: #F8F9FA;
-      --text-dim: #ADB5BD;
-      --glow-color: rgba(0, 163, 255, 0.5);
-      --neon-glow: rgba(0, 163, 255, 0.8);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    html, body {
-      height: 100%;
-      background: radial-gradient(circle at top center, var(--bg-dark) 0%, var(--bg-darker) 100%);
-      color: var(--text-light);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    canvas#starfield {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.8;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(125deg, 
-                  rgba(0,85,255,0.03) 0%, 
-                  rgba(0,163,255,0.03) 25%, 
-                  rgba(0,85,255,0.03) 50%, 
-                  rgba(0,163,255,0.03) 75%, 
-                  rgba(0,85,255,0.03) 100%);
-      background-size: 400% 400%;
-      animation: gradientBackground 20s ease infinite;
-      z-index: -1;
-    }
-
-    @keyframes gradientBackground {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    header {
-      background: linear-gradient(90deg, rgba(0,10,20,0.95), rgba(1,14,40,0.9));
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(15px);
-      border-bottom: 2px solid var(--neon-glow);
-      box-shadow: 0 4px 20px var(--glow-color);
-      animation: slideIn 1s ease-out;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .logo-container img {
-      height: 50px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
-      box-shadow: 0 0 15px var(--neon-glow);
-      transition: transform 0.4s ease;
-    }
-
-    .logo-container img:hover {
-      transform: rotate(360deg);
-    }
-
-    .logo-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: var(--text-light); /* Fallback */
-      text-shadow: 0 0 5px var(--neon-glow);
-      animation: flicker 3s infinite;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.3rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      background: rgba(0, 85, 255, 0.1);
-    }
-
-    nav a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--secondary);
-      transition: 0.3s;
-    }
-
-    nav a:hover::before {
-      width: 100%;
-    }
-
-    nav a:hover, nav a:focus {
-      background: rgba(0, 85, 255, 0.2);
-      box-shadow: 0 0 10px var(--neon-glow);
-      outline: none;
-    }
-
-    .language-selector {
-      position: absolute;
-      right: 2rem;
-      top: 1.5rem;
-    }
-
-    .language-selector select {
-      background: rgba(5,7,26,0.7);
-      color: var(--text-light);
-      border: 1px solid var(--secondary);
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 5px var(--glow-color);
-    }
-
-    .language-selector select:hover {
-      background: rgba(5,7,26,0.9);
-      box-shadow: 0 0 10px var(--neon-glow);
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-content {
-      text-align: center;
-      padding: 3rem;
-      max-width: 1000px;
-      background: rgba(1, 14, 40, 0.3);
-      border: 1px solid rgba(0, 163, 255, 0.3);
-      border-radius: 1rem;
-      backdrop-filter: blur(15px);
-      box-shadow: 
-        0 0 30px rgba(0, 163, 255, 0.2),
-        0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero h1 {
-      font-size: 5rem;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: var(--text-light); /* Fallback */
-      text-shadow: 0 0 5px var(--neon-glow);
-      animation: glitch 2s infinite;
-      margin-bottom: 2rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.5rem;
-      color: var(--text-dim);
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards 0.5s;
-    }
-
-    .typing-animation::after {
-      content: '|';
-      position: absolute;
-      right: -15px;
-      color: var(--secondary);
-      animation: cursor-blink 1s infinite;
-    }
-
-    .section {
-      padding: 5rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      text-align: center;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: var(--text-light); /* Fallback */
-      text-shadow: 0 0 5px var(--neon-glow);
-      margin-bottom: 3rem;
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .video-card {
-      background: rgba(1, 14, 40, 0.3);
-      border: 1px solid rgba(0, 163, 255, 0.3);
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(10px);
-      box-shadow: 
-        0 0 20px rgba(0, 163, 255, 0.2),
-        0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .video-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 
-        0 0 30px rgba(0, 163, 255, 0.4),
-        0 15px 25px rgba(0, 0, 0, 0.3);
-      border-color: var(--secondary);
-    }
-
-    .video-card video {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-    }
-
-    .video-info {
-      padding: 1.5rem;
-      color: var(--text-light); /* Ensure text visibility */
-    }
-
-    .video-info h3 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 0.5rem;
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-
-    .status-item {
-      background: rgba(1, 14, 40, 0.3);
-      padding: 1.5rem;
-      border: 1px solid rgba(0, 163, 255, 0.3);
-      border-radius: 1rem;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
-      box-shadow: 
-        0 0 15px rgba(0, 163, 255, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.2);
-      color: var(--text-light); /* Ensure text visibility */
-    }
-
-    .status-item:hover {
-      transform: scale(1.05);
-      box-shadow: 
-        0 0 25px rgba(0, 163, 255, 0.4),
-        0 10px 20px rgba(0, 0, 0, 0.3);
-      border-color: var(--secondary);
-    }
-
-    .status-ok { color: #00ff00; }
-    .status-warn { color: #ffaa00; }
-    .status-fail { color: #ff0000; }
-
-    #buy .product-hero {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .product-card {
-      background: rgba(1, 14, 40, 0.3);
-      border: 1px solid rgba(0, 163, 255, 0.3);
-      border-radius: 1rem;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-      box-shadow: 
-        0 0 20px rgba(0, 163, 255, 0.2),
-        0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.4s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 
-        0 0 30px rgba(0, 163, 255, 0.4),
-        0 15px 25px rgba(0, 0, 0, 0.3);
-      border-color: var(--secondary);
-    }
-
-    .product-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .product-card p {
-      margin-bottom: 1.5rem;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-
-    .pricing-card {
-      background: rgba(1, 14, 40, 0.3);
-      border: 1px solid rgba(0, 163, 255, 0.3);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
-      box-shadow: 
-        0 0 15px rgba(0, 163, 255, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .pricing-card:hover {
-      transform: scale(1.05);
-      box-shadow: 
-        0 0 25px rgba(0, 163, 255, 0.4),
-        0 10px 20px rgba(0, 0, 0, 0.3);
-      border-color: var(--secondary);
-    }
-
-    .pricing-card h4 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-card p {
-      font-size: 1.2rem;
-      color: var(--secondary);
-      margin-bottom: 1.5rem;
-    }
-
-    .buy-button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary));
-      color: var(--text-light);
-      text-decoration: none;
-      border-radius: 2rem;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(0, 85, 255, 0.5);
-      position: relative;
-      overflow: hidden;
-      animation: pulse 2s infinite;
-    }
-
-    .buy-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: 0.5s;
-    }
-
-    .buy-button:hover::before {
-      left: 100%;
-    }
-
-    .buy-button:hover, .buy-button:focus {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--secondary);
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      outline: none;
-    }
-
-    footer {
-      background: rgba(5,7,26,0.95);
-      padding: 2rem;
-      text-align: center;
-      border-top: 2px solid var(--neon-glow);
-      box-shadow: 0 -4px 15px var(--glow-color);
-    }
-
-    #topBtn {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: linear-gradient(45deg, var(--primary-dark), var(--primary), var(--secondary));
-      color: var(--text-light);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: 2px solid var(--neon-glow);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 0 15px var(--glow-color);
-      transition: all 0.3s ease;
-      animation: pulse 2s infinite;
-    }
-
-    #topBtn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px var(--neon-glow);
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      10% { transform: translate(-5px, 5px); }
-      20% { transform: translate(5px, -5px); }
-      30% { transform: translate(0); }
-      100% { transform: translate(0); }
-    }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 15px var(--glow-color); }
-      50% { box-shadow: 0 0 25px var(--neon-glow); }
-      100% { box-shadow: 0 0 15px var(--glow-color); }
-    }
-
-    @keyframes cursor-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    .reveal {
-      transform: translateY(30px);
-      transition: transform 0.8s ease;
-    }
-
-    .reveal.active {
-      transform: translateY(0);
-    }
-
-    .stagger-children > * {
-      transform: translateY(30px);
-      transition: transform 0.5s ease;
-    }
-
-    .stagger-children.active > *:nth-child(1) { transition-delay: 0.1s; }
-    .stagger-children.active > *:nth-child(2) { transition-delay: 0.3s; }
-    .stagger-children.active > *:nth-child(3) { transition-delay: 0.5s; }
-    .stagger-children.active > *:nth-child(4) { transition-delay: 0.7s; }
-    .stagger-children.active > *:nth-child(5) { transition-delay: 0.9s; }
-    .stagger-children.active > * {
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .logo-text { font-size: 1.8rem; }
-      .hero h1 { font-size: 3rem; }
-      .section h2 { font-size: 2rem; }
-      .video-grid { grid-template-columns: 1fr; }
-      .status-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .language-selector { right: 1rem; top: 1rem; }
-      .language-selector select { padding: 0.4rem; font-size: 0.9rem; }
-      .buy-button { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
-      #topBtn { width: 40px; height: 40px; font-size: 1.2rem; }
-      .product-card { padding: 1.5rem; }
-      .product-card h3 { font-size: 1.8rem; }
-    }
-
-    @media (max-width: 480px) {
-      .logo-container { flex-direction: column; gap: 0.5rem; }
-      .logo-text { font-size: 1.5rem; }
-      .hero h1 { font-size: 2rem; }
-      .section { padding: 3rem 1rem; }
-      .video-grid { padding: 1rem; }
-      .status-grid { padding: 1rem; }
-      .pricing-grid { padding: 1rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealPoint - Master Your Social Media</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6B46C1, #EC4899, #4C1D95);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(107, 70, 193, 0.9);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #F472B6;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, #A78BFA, #F472B6);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #4C1D95;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.08) rotate(1deg);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-bg {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.6), rgba(236, 72, 153, 0.6));
+        }
+
+        .testimonials {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonial-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.95);
+            color: #4C1D95;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            min-width: 100%;
+            text-align: center;
+        }
+
+        .testimonial .italic {
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .testimonial .author {
+            margin-top: 1rem;
+            font-weight: 700;
+        }
+
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card.highlight {
+            border: 3px solid #F472B6;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: #4C1D95;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: underline;
+            margin: 0 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(to right, #A78BFA, #F472B6);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+            z-index: 100;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .card:hover {
+                transform: scale(1.05) rotate(0deg);
+            }
+            .contact-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="starfield"></canvas>
-
-  <header>
-    <div class="logo-container">
-      <img src="https://i.ibb.co/HDVHdPc2/MH.png" alt="MemHook Cheats Logo" width="50" height="50" />
-      <span class="logo-text" data-i18n="header.title">MemHook Cheats</span>
-    </div>
-    <div class="language-selector">
-      <select id="language-select">
-        <option value="en" data-i18n="language.english">English</option>
-        <option value="es" data-i18n="language.spanish">Spanish</option>
-        <option value="fr" data-i18n="language.french">French</option>
-        <option value="de" data-i18n="language.german">German</option>
-        <option value="zh" data-i18n="language.chinese">Chinese</option>
-      </select>
-    </div>
-    <nav>
-      <a href="#cheats" data-i18n="nav.cheats">Cheats</a>
-      <a href="#status" data-i18n="nav.status">Status</a>
-      <a href="#buy" data-i18n="nav.buy">Buy</a>
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 8C8 12 12 16 16 16C20 16 24 12 24 8" stroke="url(#grad)" stroke-width="3"/>
+                <circle cx="10" cy="10" r="2" fill="#A78BFA"/>
+                <circle cx="22" cy="10" r="2" fill="#F472B6"/>
+                <circle cx="16" cy="16" r="2" fill="#EC4899"/>
+                <defs>
+                    <linearGradient id="grad" x1="8" y1="8" x2="24" y2="16" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#A78BFA"/>
+                        <stop offset="1" stop-color="#F472B6"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="logo-text">DealPoint</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="mailto:alex@dealpoint.forsale" class="cta-button">Contact Us</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1 data-i18n="hero.title" class="typing-animation"> Next-Level Cheating For You </h1>
-      <p class="hero-subtitle" data-i18n="hero.subtitle">Discover cutting-edge Undetected Cheats built for you.</p>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1 class="animate-fade-in">Master Your Social Media with DealPoint</h1>
+        <p>Unleash your brand’s potential with seamless scheduling, powerful analytics, and effortless collaboration.</p>
+        <a href="mailto:alex@dealpoint.forsale" class="cta-button">Get in Touch</a>
+    </section>
 
-  <section class="section reveal" id="cheats">
-    <h2 data-i18n="cheats.title">Featured Cheats</h2>
-    <div class="video-grid stagger-children">
-      <div class="video-card">
-        <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-        <div class="video-info">
-          <h3 data-i18n="cheats.showcase1.title">Black Ops 6 V2</h3>
-          <p data-i18n="cheats.showcase1.desc">The Best Black Ops 6 Cheat Around</p>
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <h2>Why DealPoint?</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Effortless Scheduling</h3>
+                <p>Plan and post across all platforms in seconds, saving you time and stress.</p>
+            </div>
+            <div class="card">
+                <h3>Insightful Analytics</h3>
+                <p>Unlock real-time data to optimize your strategy and boost engagement.</p>
+            </div>
+            <div class="card">
+                <h3>Team Sync</h3>
+                <p>Collaborate seamlessly with your team to create campaigns that shine.</p>
+            </div>
         </div>
-      </div>
-      <div class="video-card">
-        <video controls src="https://www.w3schools.com/html/movie.mp4"></video>
-        <div class="video-info">
-          <h3 data-i18n="cheats.showcase2.title">Showcase 2</h3>
-          <p data-i18n="cheats.showcase2.desc">Advanced features and capabilities</p>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonial-bg">
+        <h2>What Our Users Say</h2>
+        <div class="testimonials">
+            <div class="testimonial-container" id="testimonialContainer">
+                <div class="testimonial">
+                    <p class="italic">"DealPoint transformed our social media workflow—pure game-changer!"</p>
+                    <p class="author">— Jane Doe, Marketing Director</p>
+                </div>
+                <div class="testimonial">
+                    <p class="italic">"The analytics helped us double our engagement in weeks."</p>
+                    <p class="author">— John Smith, Influencer</p>
+                </div>
+                <div class="testimonial">
+                    <p class="italic">"Managing multiple accounts has never been easier."</p>
+                    <p class="author">— Sarah Lee, Agency Owner</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="video-card">
-        <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-        <div class="video-info">
-          <h3 data-i18n="cheats.showcase3.title">Showcase 3</h3>
-          <p data-i18n="cheats.showcase3.desc">Ultimate gaming advantage</p>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <h2>Choose Your Plan</h2>
+        <div class="grid">
+            <div class="card pricing-card">
+                <h3>Starter</h3>
+                <p class="price">$9/mo</p>
+                <p>Basic scheduling for 1 account.</p>
+                <a href="mailto:alex@dealpoint.forsale" class="cta-button">Contact Us</a>
+            </div>
+            <div class="card pricing-card highlight">
+                <h3>Pro</h3>
+                <p class="price">$19/mo</p>
+                <p>Advanced analytics, 5 accounts.</p>
+                <a href="mailto:alex@dealpoint.forsale" class="cta-button">Contact Us</a>
+            </div>
+            <div class="card pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">Custom</p>
+                <p>Unlimited accounts, priority support.</p>
+                <a href="mailto:alex@dealpoint.forsale" class="cta-button">Contact Us</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section reveal" id="status">
-    <h2 data-i18n="status.title">Cheat Status</h2>
-    <div class="status-grid stagger-children">
-      <div class="status-item">
-        <span class="status-ok" data-i18n="status.b06">✅ B06 V2 Cheat</span>
-        <p data-i18n="status.b06.status">Undetected</p>
-      </div>
-      <div class="status-item">
-        <span class="status-ok" data-i18n="status.csgo">✅ CSGO Cheat</span>
-        <p data-i18n="status.csgo.status">Undetected</p>
-      </div>
-      <div class="status-item">
-        <span class="status-warn" data-i18n="status.luna">⚠️ Luna's Cheat</span>
-        <p data-i18n="status.luna.status">Updating</p>
-      </div>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Contact: <a href="mailto:alex@dealpoint.forsale">alex@dealpoint.forsale</a></p>
+        <p>Follow us: <a href="#">X</a> | <a href="#">Instagram</a></p>
+        <p>© 2025 DealPoint. All rights reserved.</p>
+    </footer>
 
-  <section class="section reveal" id="buy">
-    <h2 data-i18n="buy.title">Buy Cheats</h2>
-    <div class="product-hero">
-      <div class="product-card reveal">
-        <h3 data-i18n="buy.b06.title">B06 External V2</h3>
-        <p data-i18n="buy.b06.desc">The ultimate cheat for unparalleled gaming performance. Undetected and packed with advanced features.</p>
-        <a class="buy-button" href="#pricing" data-i18n="buy.b06.button">View Product</a>
-      </div>
-    </div>
-    <div class="pricing-grid stagger-children" id="pricing">
-      <div class="pricing-card">
-        <h4 data-i18n="buy.b06.1day.title">1-Day Key</h4>
-        <p data-i18n="buy.b06.1day.price">$5.99</p>
-        <a class="buy-button" href="https://macheats.sellpass.io/b06-1day" target="_blank" data-i18n="buy.b06.1day.button">Purchase Now</a>
-      </div>
-      <div class="pricing-card">
-        <h4 data-i18n="buy.b06.1week.title">1-Week Key</h4>
-        <p data-i18n="buy.b06.1week.price">$19.99</p>
-        <a class="buy-button" href="https://macheats.sellpass.io/b06-1week" target="_blank" data-i18n="buy.b06.1week.button">Purchase Now</a>
-      </div>
-      <div class="pricing-card">
-        <h4 data-i18n="buy.b06.2month.title">2-Month Key</h4>
-        <p data-i18n="buy.b06.2month.price">$49.99</p>
-        <a class="buy-button" href="https://macheats.sellpass.io/b06-2month" target="_blank" data-i18n="buy.b06.2month.button">Purchase Now</a>
-      </div>
-      <div class="pricing-card">
-        <h4 data-i18n="buy.b06.lifetime.title">Lifetime Key</h4>
-        <p data-i18n="buy.b06.lifetime.price">$99.99</p>
-        <a class="buy-button" href="https://macheats.sellpass.io/b06-lifetime" target="_blank" data-i18n="buy.b06.lifetime.button">Purchase Now</a>
-      </div>
-    </div>
-  </section>
+    <!-- Floating Contact Button -->
+    <a href="mailto:alex@dealpoint.forsale" class="contact-button">Contact Us</a>
 
-  <section class="section reveal" id="about">
-    <h2 data-i18n="about.title">About MH</h2>
-    <p style="text-align: center; max-width: 900px; margin: 0 auto;" data-i18n="about.desc">
-      MemHook is a cheat media showcase platform, built for researchers and testers. 
-      Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically.
-    </p>
-  </section>
-
-  <section class="section reveal" id="contact">
-    <h2 data-i18n="contact.title">Contact Us</h2>
-    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-      <p data-i18n="contact.desc">Join our Discord for updates, access, and community support:</p>
-      <a href="https://discord.gg/placeholder" class="buy-button" style="margin-top: 1rem;" data-i18n="contact.button">Join Discord</a>
-      <form style="margin-top: 2rem;">
-        <input type="text" placeholder="Your Name" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.5rem; border: 1px solid var(--secondary); background: rgba(1, 14, 40, 0.3); color: var(--text-light);" required>
-        <input type="email" placeholder="Your Email" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.5rem; border: 1px solid var(--secondary); background: rgba(1, 14, 40, 0.3); color: var(--text-light);" required>
-        <textarea placeholder="Your Message" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.5rem; border: 1px solid var(--secondary); background: rgba(1, 14, 40, 0.3); color: var(--text-light); height: 100px;" required></textarea>
-        <button type="submit" class="buy-button" style="width: 100%;">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="reveal">
-    <p data-i18n="footer.copyright">© 2025 MH Cheats. Content shown is for educational and research purposes only.</p>
-    <p data-i18n="footer.designed">Website designed by <a href="https://www.dealpoint.forsale" target="_blank">DealPoint</a></p>
-  </footer>
-
-  <button id="topBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
-
-  <script src="https://unpkg.com/i18next@23.11.5/dist/umd/i18next.min.js"></script>
-  <script src="https://unpkg.com/i18next-browser-languagedetector@8.0.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
-
-  <script>
-    const resources = {
-      en: {
-        translation: {
-          title: "MH Cheats",
-          header: { title: "MemHook Cheats" },
-          language: {
-            english: "English",
-            spanish: "Spanish",
-            french: "French",
-            german: "German",
-            chinese: "Chinese"
-          },
-          nav: {
-            cheats: "Cheats",
-            status: "Status",
-            buy: "Buy",
-            about: "About",
-            contact: "Contact"
-          },
-          hero: { title: "Next-Level Cheating For You", subtitle: "Discover cutting-edge gaming enhancements, built for researchers and testers." },
-          cheats: {
-            title: "Featured Cheats",
-            showcase1: { title: "Showcase 1", desc: "Experience next-level gameplay enhancement" },
-            showcase2: { title: "Showcase 2", desc: "Advanced features and capabilities" },
-            showcase3: { title: "Showcase 3", desc: "Ultimate gaming advantage" }
-          },
-          status: {
-            title: "Cheat Status",
-            b06: "✅ B06 V2 Cheat",
-            "b06.status": "Undetected",
-            csgo: "✅ CSGO Cheat",
-            "csgo.status": "Undetected",
-            luna: "⚠️ Luna's Cheat",
-            "luna.status": "Updating"
-          },
-          buy: {
-            title: "Buy Cheats",
-            b06: {
-              title: "B06 External V2",
-              desc: "The ultimate cheat for unparalleled gaming performance. Undetected and packed with advanced features.",
-              button: "View Product",
-              "1day": { title: "1-Day Key", price: "$5.99", button: "Purchase Now" },
-              "1week": { title: "1-Week Key", price: "$19.99", button: "Purchase Now" },
-              "2month": { title: "2-Month Key", price: "$49.99", button: "Purchase Now" },
-              lifetime: { title: "Lifetime Key", price: "$99.99", button: "Purchase Now" }
-            }
-          },
-          about: {
-            title: "About MH",
-            desc: "MemHook is a cheat media showcase platform, built for researchers and testers. Our goal is to demonstrate exploit methods, bypass theory, and UI design — responsibly and ethically."
-          },
-          contact: {
-            title: "Contact Us",
-            desc: "Join our Discord for updates, access, and community support:",
-            button: "Join Discord"
-          },
-          footer: {
-            copyright: "© 2025 MH Cheats. Content shown is for educational and research purposes only.",
-            designed: "Website designed by <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
-          }
-        }
-      },
-      es: {
-        translation: {
-          title: "Trucos MH",
-          header: { title: "Trucos MemHook" },
-          language: {
-            english: "Inglés",
-            spanish: "Español",
-            french: "Francés",
-            german: "Alemán",
-            chinese: "Chino"
-          },
-          nav: {
-            cheats: "Trucos",
-            status: "Estado",
-            buy: "Comprar",
-            about: "Acerca de",
-            contact: "Contacto"
-          },
-          hero: { title: "Trampas de Próximo Nivel para Ti", subtitle: "Descubre mejoras de juego de vanguardia, creadas para investigadores y probadores." },
-          cheats: {
-            title: "Trucos Destacados",
-            showcase1: { title: "Demostración 1", desc: "Experimenta mejoras de juego de próximo nivel" },
-            showcase2: { title: "Demostración 2", desc: "Funciones y capacidades avanzadas" },
-            showcase3: { title: "Demostración 3", desc: "Ventaja definitiva en juegos" }
-          },
-          status: {
-            title: "Estado de los Trucos",
-            b06: "✅ Truco B06 V2",
-            "b06.status": "No Detectado",
-            csgo: "✅ Truco CSGO",
-            "csgo.status": "No Detectado",
-            luna: "⚠️ Truco de Luna",
-            "luna.status": "Actualizando"
-          },
-          buy: {
-            title: "Comprar Trucos",
-            b06: {
-              title: "B06 Externo V2",
-              desc: "El truco definitivo para un rendimiento de juego sin igual. No detectado y repleto de funciones avanzadas.",
-              button: "Ver Producto",
-              "1day": { title: "Clave de 1 Día", price: "$5.99", button: "Comprar Ahora" },
-              "1week": { title: "Clave de 1 Semana", price: "$19.99", button: "Comprar Ahora" },
-              "2month": { title: "Clave de 2 Meses", price: "$49.99", button: "Comprar Ahora" },
-              lifetime: { title: "Clave de Por Vida", price: "$99.99", button: "Comprar Ahora" }
-            }
-          },
-          about: {
-            title: "Acerca de MH",
-            desc: "MemHook es una plataforma de exhibición de medios de trucos, creada para investigadores y probadores. Nuestro objetivo es demostrar métodos-hacking, teoría de bypass y diseño de UI — de manera responsable y ética."
-          },
-          contact: {
-            title: "Contáctanos",
-            desc: "Únete a nuestro Discord para actualizaciones, acceso y soporte comunitario:",
-            button: "Unirse a Discord"
-          },
-          footer: {
-            copyright: "© 2025 Trucos MH. El contenido mostrado es solo para fines educativos y de investigación.",
-            designed: "Sitio web diseñado por <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
-          }
-        }
-      },
-      fr: {
-        translation: {
-          title: "Cheats MH",
-          header: { title: "Cheats MemHook" },
-          language: {
-            english: "Anglais",
-            spanish: "Espagnol",
-            french: "Français",
-            german: "Allemand",
-            chinese: "Chinois"
-          },
-          nav: {
-            cheats: "Cheats",
-            status: "Statut",
-            buy: "Acheter",
-            about: "À propos",
-            contact: "Contact"
-          },
-          hero: { title: "Tricherie de Niveau Supérieur pour Vous", subtitle: "Découvrez des améliorations de jeu de pointe, conçues pour les chercheurs et les testeurs." },
-          cheats: {
-            title: "Cheats en Vedette",
-            showcase1: { title: "Vitrine 1", desc: "Découvrez une amélioration de jeu de niveau supérieur" },
-            showcase2: { title: "Vitrine 2", desc: "Fonctionnalités et capacités avancées" },
-            showcase3: { title: "Vitrine 3", desc: "Avantage ultime dans les jeux" }
-          },
-          status: {
-            title: "Statut des Cheats",
-            b06: "✅ Cheat B06 V2",
-            "b06.status": "Non Détecté",
-            csgo: "✅ Cheat CSGO",
-            "csgo.status": "Non Détecté",
-            luna: "⚠️ Cheat de Luna",
-            "luna.status": "En Mise à Jour"
-          },
-          buy: {
-            title: "Acheter des Cheats",
-            b06: {
-              title: "B06 Externe V2",
-              desc: "Le cheat ultime pour des performances de jeu inégalées. Non détecté et rempli de fonctionnalités avancées.",
-              button: "Voir le Produit",
-              "1day": { title: "Clé de 1 Jour", price: "$5.99", button: "Acheter Maintenant" },
-              "1week": { title: "Clé de 1 Semaine", price: "$19.99", button: "Acheter Maintenant" },
-              "2month": { title: "Clé de 2 Mois", price: "$49.99", button: "Acheter Maintenant" },
-              lifetime: { title: "Clé à Vie", price: "$99.99", button: "Acheter Maintenant" }
-            }
-          },
-          about: {
-            title: "À propos de MH",
-            desc: "MemHook est une plateforme de présentation de médias de cheats, conçue pour les chercheurs et les testeurs. Notre objectif est de démontrer les méthodes-hacking, la théorie de contournement et la conception d'interface utilisateur — de manière responsable et éthique."
-          },
-          contact: {
-            title: "Contactez-nous",
-            desc: "Rejoignez notre Discord pour les mises à jour, l'accès et le soutien communautaire :",
-            button: "Rejoindre Discord"
-          },
-          footer: {
-            copyright: "© 2025 Cheats MH. Le contenu affiché est uniquement à des fins éducatives et de recherche.",
-            designed: "Site web conçu par <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
-          }
-        }
-      },
-      de: {
-        translation: {
-          title: "MH Cheats",
-          header: { title: "MemHook Cheats" },
-          language: {
-            english: "Englisch",
-            spanish: "Spanisch",
-            french: "Französisch",
-            german: "Deutsch",
-            chinese: "Chinesisch"
-          },
-          nav: {
-            cheats: "Cheats",
-            status: "Status",
-            buy: "Kaufen",
-            about: "Über",
-            contact: "Kontakt"
-          },
-          hero: { title: "Cheating auf Höchstem Niveau für Sie", subtitle: "Entdecken Sie erstklassige Spielverbesserungen, entwickelt für Forscher und Tester." },
-          cheats: {
-            title: "Ausgewählte Cheats",
-            showcase1: { title: "Showcase 1", desc: "Erleben Sie Spielverbesserungen auf höchstem Niveau" },
-            showcase2: { title: "Showcase 2", desc: "Fortgeschrittene Funktionen und Fähigkeiten" },
-            showcase3: { title: "Showcase 3", desc: "Ultimativer Spielvorteil" }
-          },
-          status: {
-            title: "Cheat-Status",
-            b06: "✅ B06 V2 Cheat",
-            "b06.status": "Unentdeckt",
-            csgo: "✅ CSGO Cheat",
-            "csgo.status": "Unentdeckt",
-            luna: "⚠️ Luna's Cheat",
-            "luna.status": "In Aktualisierung"
-          },
-          buy: {
-            title: "Cheats Kaufen",
-            b06: {
-              title: "B06 Extern V2",
-              desc: "Der ultimative Cheat für unübertroffene Spieleleistung. Unentdeckt und vollgepackt mit fortschrittlichen Funktionen.",
-              button: "Produkt Anzeigen",
-              "1day": { title: "1-Tages-Schlüssel", price: "$5.99", button: "Jetzt Kaufen" },
-              "1week": { title: "1-Wochen-Schlüssel", price: "$19.99", button: "Jetzt Kaufen" },
-              "2month": { title: "2-Monats-Schlüssel", price: "$49.99", button: "Jetzt Kaufen" },
-              lifetime: { title: "Lebenslanger Schlüssel", price: "$99.99", button: "Jetzt Kaufen" }
-            }
-          },
-          about: {
-            title: "Über MH",
-            desc: "MemHook ist eine Plattform zur Präsentation von Cheat-Medien, entwickelt für Forscher und Tester. Unser Ziel ist es, Exploit-Methoden, Bypass-Theorie und UI-Design zu demonstrieren — verantwortungsvoll und ethisch."
-          },
-          contact: {
-            title: "Kontaktieren Sie uns",
-            desc: "Treten Sie unserem Discord bei für Updates, Zugang und Community-Unterstützung:",
-            button: "Discord Beitreten"
-          },
-          footer: {
-            copyright: "© 2025 MH Cheats. Der gezeigte Inhalt dient ausschließlich Bildungs- und Forschungszwecken.",
-            designed: "Website gestaltet von <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a>"
-          }
-        }
-      },
-      zh: {
-        translation: {
-          title: "MH 作弊",
-          header: { title: "MemHook 作弊" },
-          language: {
-            english: "英语",
-            spanish: "西班牙语",
-            french: "法语",
-            german: "德语",
-            chinese: "中文"
-          },
-          nav: {
-            cheats: "作弊",
-            status: "状态",
-            buy: "购买",
-            about: "关于",
-            contact: "联系"
-          },
-          hero: { title: "为您提供下一级作弊体验", subtitle: "探索尖端游戏增强功能，专为研究人员和测试人员打造。" },
-          cheats: {
-            title: "特色作弊",
-            showcase1: { title: "展示 1", desc: "体验下一级的游戏增强" },
-            showcase2: { title: "展示 2", desc: "高级功能和能力" },
-            showcase3: { title: "展示 3", desc: "终极游戏优势" }
-          },
-          status: {
-            title: "作弊状态",
-            b06: "✅ B06 V2 作弊",
-            "b06.status": "未被检测",
-            csgo: "✅ CSGO 作弊",
-            "csgo.status": "未被检测",
-            luna: "⚠️ Luna的作弊",
-            "luna.status": "更新中"
-          },
-          buy: {
-            title: "购买作弊",
-            b06: {
-              title: "B06 外部 V2",
-              desc: "为无与伦比的游戏性能提供的终极作弊。未被检测并充满高级功能。",
-              button: "查看产品",
-              "1day": { title: "1天密钥", price: "$5.99", button: "立即购买" },
-              "1week": { title: "1周密钥", price: "$19.99", button: "立即购买" },
-              "2month": { title: "2个月密钥", price: "$49.99", button: "立即购买" },
-              lifetime: { title: "终身密钥", price: "$99.99", button: "立即购买" }
-            }
-          },
-          about: {
-            title: "关于 MH",
-            desc: "MemHook 是一个为研究人员和测试人员构建的作弊媒体展示平台。我们的目标是展示漏洞利用方法、绕过理论和用户界面设计——以负责任和道德的方式。"
-          },
-          contact: {
-            title: "联系我们",
-            desc: "加入我们的 Discord 以获取更新、访问和社区支持：",
-            button: "加入 Discord"
-          },
-          footer: {
-            copyright: "© 2025 MH 作弊。展示的内容仅用于教育和研究目的。",
-            designed: "网站由 <a href='https://www.dealpoint.forsale' target='_blank'>DealPoint</a> 设计"
-          }
-        }
-      }
-    };
-
-    i18next
-      .use(i18nextBrowserLanguageDetector)
-      .init({
-        resources,
-        fallbackLng: 'en',
-        debug: false,
-        interpolation: {
-          escapeValue: false
-        }
-      }, function(err, t) {
-        if (err) {
-          console.error('i18next initialization error:', err);
-          return;
-        }
-        updateContent();
-      });
-
-    function updateContent() {
-      document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        const translation = i18next.t(key);
-        if (translation) {
-          element.innerHTML = translation;
-        } else {
-          console.warn(`Translation missing for key: ${key}`);
-        }
-      });
-      document.title = i18next.t('title') || 'MH Cheats';
-      initTypingAnimation();
-    }
-
-    function initTypingAnimation() {
-      const typingElements = document.querySelectorAll('.typing-animation');
-      typingElements.forEach(element => {
-        element.classList.remove('typing-animation');
-        const text = element.innerHTML;
-        element.innerHTML = '';
-        setTimeout(() => {
-          element.classList.add('typing-animation');
-          let i = 0;
-          const typeInterval = setInterval(() => {
-            if (i < text.length) {
-              element.innerHTML += text.charAt(i);
-              i++;
-            } else {
-              clearInterval(typeInterval);
-            }
-          }, 50);
-        }, 100);
-      });
-    }
-
-    document.getElementById('language-select').addEventListener('change', (e) => {
-      i18next.changeLanguage(e.target.value, () => {
-        updateContent();
-      });
-    });
-
-    i18next.on('languageChanged', () => {
-      updateContent();
-    });
-
-    const canvas = document.getElementById('starfield');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    let shootingStars = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initStars();
-    }
-
-    function initStars() {
-      stars = [];
-      for (let i = 0; i < 200; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: Math.random() * 1.5,
-          alpha: Math.random(),
-          speed: Math.random() * 0.02 + 0.01,
-          color: `rgba(${Math.floor(220 + Math.random() * 35)}, ${Math.floor(220 + Math.random() * 35)}, 255, `
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('.nav-links a, .cta-button').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
-      }
-    }
 
-    function createShootingStar() {
-      shootingStars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height * 0.3,
-        length: Math.random() * 50 + 20,
-        speed: Math.random() * 5 + 5,
-        alpha: 1,
-        angle: Math.random() * Math.PI / 4 + Math.PI / 8
-      });
-    }
+        // Testimonial carousel
+        const container = document.getElementById('testimonialContainer');
+        let currentIndex = 0;
+        const slides = container.children;
+        const slideCount = slides.length;
 
-    function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach(star => {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `${star.color}${star.alpha})`;
-        ctx.fill();
-        star.alpha += star.speed * (Math.random() > 0.5 ? 1 : -1);
-        if (star.alpha > 1) star.alpha = 1;
-        if (star.alpha < 0.2) star.alpha = 0.2;
-      });
-
-      shootingStars = shootingStars.filter(star => star.alpha > 0);
-      shootingStars.forEach(star => {
-        const dx = Math.cos(star.angle) * star.speed;
-        const dy = Math.sin(star.angle) * star.speed;
-        star.x += dx;
-        star.y += dy;
-        star.alpha -= 0.02;
-        ctx.beginPath();
-        ctx.moveTo(star.x, star.y);
-        ctx.lineTo(star.x - dx * star.length * 0.2, star.y - dy * star.length * 0.2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${star.alpha})`;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      });
-
-      if (Math.random() < 0.01) createShootingStar();
-      requestAnimationFrame(animateStars);
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    animateStars();
-
-    function handleScrollAnimation() {
-      const reveals = document.querySelectorAll('.reveal, .stagger-children');
-      reveals.forEach(elem => {
-        const windowHeight = window.innerHeight;
-        const elementTop = elem.getBoundingClientRect().top;
-        const elementVisible = 150;
-        if (elementTop < windowHeight - elementVisible) {
-          elem.classList.add('active');
-        } else {
-          elem.classList.remove('active'); // Ensure reset for re-scrolling
+        function updateCarousel() {
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            currentIndex = (currentIndex + 1) % slideCount;
         }
-      });
-    }
 
-    window.addEventListener('scroll', handleScrollAnimation);
-    window.addEventListener('load', handleScrollAnimation);
-  </script>
+        setInterval(updateCarousel, 5000);
+        updateCarousel();
+    </script>
+</body>
+</html>
